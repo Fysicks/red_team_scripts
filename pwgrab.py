@@ -1,5 +1,6 @@
 import os
 import subprocess as s
+import sys
 
 def main():
 	#This function creates a script that edits .bashrc
@@ -11,6 +12,9 @@ def main():
 	#Printing notice
 	input("[!] THIS SHOULD BE RUN ON ATTACKING MACHINE(hit enter to continue)")
 
+	#if(len(sys.argv) > 1):
+	#	input("test")
+	#input("testing")
 	#Grabbing ip of attacking box
 	ip = s.getoutput("hostname -I")
 	print("[*] Hosting web server on: " + str(ip))
